@@ -1,0 +1,96 @@
+{
+  "pixel_classifier_type": "OpenCVPixelClassifier",
+  "metadata": {
+    "inputPadding": 0,
+    "inputResolution": {
+      "pixelWidth": {
+        "value": 2.0216,
+        "unit": "µm"
+      },
+      "pixelHeight": {
+        "value": 2.0216,
+        "unit": "µm"
+      },
+      "zSpacing": {
+        "value": 1.0,
+        "unit": "z-slice"
+      },
+      "timeUnit": "SECONDS",
+      "timepoints": []
+    },
+    "inputWidth": 512,
+    "inputHeight": 512,
+    "inputNumChannels": 3,
+    "outputType": "CLASSIFICATION",
+    "outputChannels": [],
+    "classificationLabels": {
+      "0": {
+        "name": "Ignore*",
+        "color": [
+          180,
+          180,
+          180
+        ]
+      },
+      "1": {
+        "name": "Tissue",
+        "color": [
+          83,
+          47,
+          31
+        ]
+      }
+    }
+  },
+  "op": {
+    "type": "data.op.channels",
+    "colorTransforms": [
+      {
+        "stains": {
+          "name": "H\u0026E default",
+          "stain1": {
+            "r": 0.6511112717767477,
+            "g": 0.7011913719134059,
+            "b": 0.29049057079268853,
+            "name": "Hematoxylin",
+            "isResidual": false
+          },
+          "stain2": {
+            "r": 0.2158989396452469,
+            "g": 0.8011960486835193,
+            "b": 0.5580972490829657,
+            "name": "Eosin",
+            "isResidual": false
+          },
+          "stain3": {
+            "r": 0.3155117391114719,
+            "g": -0.5981591825264391,
+            "b": 0.7366531984876986,
+            "name": "Residual",
+            "isResidual": true
+          },
+          "maxRed": 255.0,
+          "maxGreen": 255.0,
+          "maxBlue": 255.0
+        },
+        "stainNumber": 2
+      }
+    ],
+    "op": {
+      "type": "op.core.sequential",
+      "ops": [
+        {
+          "type": "op.filters.gaussian",
+          "sigmaX": 4.5,
+          "sigmaY": 4.5
+        },
+        {
+          "type": "op.threshold.constant",
+          "thresholds": [
+            0.11
+          ]
+        }
+      ]
+    }
+  }
+}
